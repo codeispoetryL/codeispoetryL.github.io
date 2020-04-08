@@ -70,7 +70,7 @@
     
     
     
-    <article id="post-Java面试题解析" class="article article-type-post" itemscope
+    <article id="post-SSM面试题解析" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -78,8 +78,8 @@
     <header class="article-header">
        
 <h2 itemprop="name">
-  <a class="article-title" href="/2020/04/04/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/"
-    >Java SE面试题</a> 
+  <a class="article-title" href="/2020/04/08/SSM%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/"
+    >SSM面试题解析</a> 
 </h2>
  
 
@@ -88,7 +88,84 @@
 
     
     <div class="article-meta">
-      <a href="/2020/04/04/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/" class="article-date">
+      <a href="/2020/04/08/SSM%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/" class="article-date">
+  <time datetime="2020-04-08T10:39:07.000Z" itemprop="datePublished">2020-04-08</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E9%9D%A2%E8%AF%95/">面试</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="Spring-Bean的作用域"><a href="#Spring-Bean的作用域" class="headerlink" title="Spring Bean的作用域"></a>Spring Bean的作用域</h2><p><strong>Q：</strong><br>Spring Bean的作用域之间有什么区别？</p>
+<p><strong>A：</strong><br>可以通过scope属性来指定bean的作用域：</p>
+<ul>
+<li>singleton：默认值。当IOC容器一创建就会创建bean的实例，而且是单例的，每次的到的都是同一个</li>
+<li>prototype：原型的。当IOC容器一创建不再实例化该bean，每次调用getBean方法时再实例化该bean，而且调用一次创建一个对象</li>
+<li>request：每次请求实例化一个bean</li>
+<li>session：在一次会话中共享一个bean</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SSM/" rel="tag">SSM</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Java SE面试题解析" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/04/04/Java%20SE%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/"
+    >Java SE面试题解析</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/04/04/Java%20SE%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/" class="article-date">
   <time datetime="2020-04-04T02:27:59.000Z" itemprop="datePublished">2020-04-04</time>
 </a>
       
@@ -110,14 +187,9 @@
       
 
       
-      <hr>
-<h2 id="标题-模板"><a href="#标题-模板" class="headerlink" title="标题(模板)"></a>标题(模板)</h2><p><strong>Q:</strong></p>
-<p><strong>A:</strong></p>
-<p><strong>知识点:</strong></p>
-<hr>
-<h2 id="变量自增"><a href="#变量自增" class="headerlink" title="变量自增"></a>变量自增</h2><p><strong>Q:</strong><br>如下代码的运行结果?</p>
+      <h2 id="变量自增"><a href="#变量自增" class="headerlink" title="变量自增"></a>变量自增</h2><p><strong>Q:</strong><br>如下代码的运行结果?</p>
       
-      <a class="article-more-link" href="/2020/04/04/Java%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/">阅读更多...</a>
+      <a class="article-more-link" href="/2020/04/04/Java%20SE%E9%9D%A2%E8%AF%95%E9%A2%98%E8%A7%A3%E6%9E%90/">阅读更多...</a>
       
       
       <!-- reward -->
@@ -130,7 +202,7 @@
     <footer class="article-footer">
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java-%E9%9D%A2%E8%AF%95%E9%A2%98/" rel="tag">Java 面试题</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
 
 
     </footer>
