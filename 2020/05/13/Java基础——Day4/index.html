@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Java基础——Day4 |  鱼丸子
+  </title>
+  <meta name="generator" content="hexo-theme-yilia-plus">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    <main class="content on">
+      <section class="outer">
+  <article id="post-Java基础——Day4" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Java基础——Day4
+</h1>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/13/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day4/" class="article-date">
+  <time datetime="2020-05-13T06:18:45.000Z" itemprop="datePublished">2020-05-13</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      
+      
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.5k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">16 min</span>
+        </span>
+    </span>
+</div>
+
+      
+    </div>
+    
+
+    
+    
+    <div class="tocbot"></div>
+
+
+
+
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向过程（POP）：强调的是功能行为，以函数为最小单位，考虑怎么做<br>面向对象（OOP）：将功能封装进对象，强调具备了功能的对象，以类/对象为最小单位，考虑谁来做<br>面向对象的三大特征：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><p>定义：</p>
+<ul>
+<li>类：对一类事物的描述，是抽象的、概念上的定义</li>
+<li>对象：是实际存在的该类事物的每个个体，也称实例</li>
+</ul>
+<p>类的成员：</p>
+<ul>
+<li>属性 = 成员变量 = field</li>
+<li>方法 = 成员方法 = method = 函数</li>
+<li>构造器 = 构造方法 = constructor</li>
+<li>代码块 = 初始化块</li>
+<li>内部类</li>
+</ul>
+<p>类和对象的使用：</p>
+<ul>
+<li>第一步：创建类、设计类的成员</li>
+<li>第二步：创建类的对象</li>
+<li>第三步：通过“对象.属性”或“对象.方法”调用对象的结构</li>
+</ul>
+<p>成员一：属性（成员变量）和局部变量的区别</p>
+<ul>
+<li>相同点<ul>
+<li>定义变量的格式相同：数据类型 变量名 = 变量值</li>
+<li>先声明，后使用</li>
+<li>都有其对应的作用域</li>
+</ul>
+</li>
+<li>不同点<ul>
+<li>在类中声明的位置不同<ul>
+<li>属性：直接定义在类的一对{ }内</li>
+<li>局部变量：声明在方法内、方法形参、代码块内、构造器形参、构造器内部的变量</li>
+</ul>
+</li>
+<li>权限修饰符不同<ul>
+<li>属性：可以在声明属性时，指明其权限，使用权限修饰符</li>
+<li>局部变量：不可以使用权限修饰符</li>
+</ul>
+</li>
+<li>默认初始化值不同<ul>
+<li>属性：根据其类型，都有默认初始化值</li>
+<li>局部变量：没有默认初始化值。因此，在调用局部变量的时候，一定要显式赋值</li>
+</ul>
+</li>
+<li>在内存中加载的位置不同<ul>
+<li>属性（非static）：加载到堆内存空间中</li>
+<li>局部变量：加载到栈空间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>成员二：方法：</p>
+<ul>
+<li><p>方法的声明</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">权限修饰符 返回值类型 方法名(形参列表)&#123;</span><br><span class="line">    方法体;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>方法的重载：在同一个类中，允许存在一个以上的同名方法，要求参数列表不同</p>
+</li>
+<li><p>可变形参的方法</p>
+<ul>
+<li><p>jdk 5.0 新增内容</p>
+</li>
+<li><p>格式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Test test = <span class="keyword">new</span> Test();</span><br><span class="line">    test.show(<span class="string">"AA"</span>, <span class="string">"BB"</span>, <span class="string">"CC"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String ... strs)</span> </span>&#123;  <span class="comment">//形参写法二：(new String[]&#123;"AA", "BB", "CC"&#125;)</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; strs.length; i++) &#123;</span><br><span class="line">      System.out.println(strs[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当调用可变个数参数的方法时，参数的个数可以是0个、1个……</p>
+</li>
+<li><p>可变个数形参的方法与本类中方法名相同，参数列表不同的其他方法构成重载</p>
+</li>
+<li><p>可变个数形参在方法的形参中只能声明一个，且必须声明在末尾</p>
+</li>
+</ul>
+</li>
+<li><p>方法参数的传递机制</p>
+<ul>
+<li>若参数是基本数据类型，此时实参赋给形参的是实参真实存储的数据值</li>
+<li>若参数是引用数据类型，此时实参赋给形参的是实参存储数据的地址值</li>
+</ul>
+</li>
+<li><p>递归方法：一个方法体内调用他自身</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>方法中可以调用当前类的属性和方法</li>
+<li>方法中不可以定义方法</li>
+<li>递归一定要向已知方向递归，否则这种递归就变成了无穷递归</li>
+</ul>
+</li>
+</ul>
+<p>成员三：构造器</p>
+<ul>
+<li>作用<ul>
+<li>创建对象</li>
+<li>给对象进行初始化</li>
+</ul>
+</li>
+<li>说明：<ul>
+<li>如果没有显式的定义类的构造器的话，系统会默认的提供一个空的构造器</li>
+</ul>
+</li>
+<li>格式：权限修饰符 类名(形参列表) { }</li>
+<li>一个类中定义的多个构造器，彼此构成重载</li>
+<li>一个类中，至少会有一个构造器</li>
+</ul>
+<p>成员四：代码块</p>
+<ul>
+<li><p>作用：用来初始化类、对象</p>
+</li>
+<li><p>格式：{ }</p>
+</li>
+<li><p>分类</p>
+<ul>
+<li>静态代码块<ul>
+<li>随着类的加载而执行，且只执行一次</li>
+<li>作用：可以初始化类的信息</li>
+<li>只能调用静态结构</li>
+</ul>
+</li>
+<li>非静态代码块<ul>
+<li>随着构造器的执行（对象的创建）而执行，每次创建对象都会执行一次</li>
+<li>作用：可以在创建对象时，对对象的属性等进行初始化</li>
+<li>即可调用非静态结构，也可以调用静态结构</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注：</p>
+<ul>
+<li>代码块只能用static修饰</li>
+<li>静态代码块要优先于非静态代码块的执行</li>
+<li>如果一个类中定义了多个静态代码块或非静态代码块，同类之间按照先后顺序执行</li>
+<li>代码块的执行要先于构造器</li>
+</ul>
+</li>
+<li><p>例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"1111"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(<span class="string">"2222"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Father</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"3333"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Son</span> <span class="keyword">extends</span> <span class="title">Father</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> &#123;</span><br><span class="line">    System.out.println(<span class="string">"4444"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#123;</span><br><span class="line">    System.out.println(<span class="string">"5555"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="title">Son</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"6666"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"7777"</span>);</span><br><span class="line">    System.out.println(<span class="string">"********************"</span>);</span><br><span class="line">    <span class="keyword">new</span> Son();</span><br><span class="line">    System.out.println(<span class="string">"********************"</span>);</span><br><span class="line">    <span class="keyword">new</span> Father();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行结果如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1111</span><br><span class="line">4444</span><br><span class="line">7777</span><br><span class="line">********************</span><br><span class="line">2222</span><br><span class="line">3333</span><br><span class="line">5555</span><br><span class="line">6666</span><br><span class="line">********************</span><br><span class="line">2222</span><br><span class="line">3333</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>成员五：内部类</p>
+<ul>
+<li><p>Java中允许将一个类A声明在另一个类B中，则类A称为内部类，类B称为外部类</p>
+</li>
+<li><p>分类：</p>
+<ul>
+<li>成员内部类：分静态和非静态<ul>
+<li>作为外部类的成员<ul>
+<li>调用外部类的结构</li>
+<li>可被static修饰</li>
+<li>可被4中不同的权限修饰</li>
+</ul>
+</li>
+<li>作为一个类<ul>
+<li>类内可以定义属性、方法、构造器等</li>
+<li>可以被final、abstract修饰</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>局部内部类：声明在方法、构造器、代码块里</li>
+</ul>
+</li>
+<li><p>内部类的实例化：</p>
+<ul>
+<li><p>静态成员内部类：外部类B.内部类A a = new 外部类B.内部类A();</p>
+</li>
+<li><p>非静态成员内部类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">外部类B b = <span class="keyword">new</span> 外部类B();</span><br><span class="line">外部类B.内部类A a = b.<span class="keyword">new</span> 内部类A();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>成员内部类中区分调用外部类的结构：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">外部类B &#123;</span><br><span class="line">  String name;</span><br><span class="line"></span><br><span class="line">  内部类A &#123;</span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">      System.out.println(name);  <span class="comment">//方法的形参</span></span><br><span class="line">      System.out.println(<span class="keyword">this</span>.name);  <span class="comment">//内部类的属性</span></span><br><span class="line">      System.out.println(B.<span class="keyword">this</span>.name);  <span class="comment">//外部类的属性</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>局部内部类的使用：适用于<code>返回一个实现了接口的类的对象</code>的方法</p>
+</li>
+<li><p>注意事项：</p>
+<ul>
+<li>在局部内部类的方法中，如果要调用该类所在方法中的局部变量时，要求该变量声明为final（jdk8及以之后的版本，可以省略final不写）</li>
+</ul>
+</li>
+</ul>
+<p>内存解析：</p>
+<ul>
+<li>堆（heap）：存放对象实例。如：new出来的结构、对象的属性（非static）</li>
+<li>栈（stack）：即虚拟机栈，用于存储局部变量等。方法执行完，自动释放</li>
+<li>方法区（method area）：用于存储已被虚拟机加载的类信息、常量、静态变量、即时编译器编译后的代码等数据</li>
+</ul>
+<p>匿名对象：</p>
+<ul>
+<li>定义：没有给创建的对象显式的赋一个变量名</li>
+<li>特征：匿名对象只能调用一次</li>
+</ul>
+<h3 id="面向对象的三大特征"><a href="#面向对象的三大特征" class="headerlink" title="面向对象的三大特征"></a>面向对象的三大特征</h3><p>封装：</p>
+<ul>
+<li><p>定义：隐藏对象内部的复杂性，只对外公开简单的接口。“高内聚，低耦合”</p>
+</li>
+<li><p>封装性的体现：</p>
+<ul>
+<li>将类的属性私有化，同时提供公共的方法来获取和设置此属性的值</li>
+<li>不对外暴露的私有方法</li>
+<li>单例模式（将构造器私有化）</li>
+<li>…</li>
+</ul>
+</li>
+<li><p>封装性的体现，需要权限修饰符来配合：</p>
+<table>
+<thead>
+<tr>
+<th>修饰符</th>
+<th>类内部</th>
+<th>同一个包</th>
+<th>不同包的子类</th>
+<th>同一个工程</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>private</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>（缺省）</td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>protected</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td></td>
+</tr>
+<tr>
+<td>public</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<ul>
+<li>4种权限都可以用来修饰类的内部结构：属性、方法、构造器、内部类</li>
+<li>修饰类只能使用：缺省和public</li>
+</ul>
+</li>
+<li><p>总结封装性：Java提供了4种权限修饰符来修饰类及类的内部结构，体现类及类的内部结构在被调用时的可见性的大小</p>
+</li>
+</ul>
+<p>继承：</p>
+<ul>
+<li>优点<ul>
+<li>减少代码冗余，提高代码的复用性</li>
+<li>便于功能的扩展</li>
+<li>为多态性的使用，提供了前提</li>
+</ul>
+</li>
+<li>格式：class A extends B { }<ul>
+<li>A：子类、派生类、subclass</li>
+<li>B：父类、超类、基类、superclass</li>
+</ul>
+</li>
+<li>体现<ul>
+<li>一旦子类A继承父类B以后，A就获取了B中声明的属性和方法</li>
+<li>A继承B以后，还可以声明自己特有的属性和方法，实现功能的扩展</li>
+</ul>
+</li>
+<li>规定<ul>
+<li>一个父类可以被多个子类继承，但一个子类只能有一个父类</li>
+<li>子类继承父类之后，就获取直接父类和间接父类中声明的属性和方法</li>
+<li>若没有显式的声明一个类的父类的话，则此类继承于java.lang.Object类</li>
+<li>所有的Java类都直接或间接的继承Object类</li>
+</ul>
+</li>
+<li>子类对象实例化的全过程<ul>
+<li>从结果来看：<ul>
+<li>子类继承父类以后，就获取了父类中声明的属性或方法</li>
+<li>创建子类的对象，在堆空间中，就会加载所有父类中声明的属性</li>
+</ul>
+</li>
+<li>从过程上来看：当通过子类的构造器创建子类对象时，一定会直接或间接的调用其父类的构造器，直到调用了java.lang.Object类中空参的构造器为止。正因为加载过所有的父类的结构，所以才可以看到内存中有父类中的结构，子类对象才可以考虑进行调用</li>
+<li>注意事项：虽然创建子类对象时，调用了父类的构造器，但自始至终就创建了一个对象，即new的子类对象</li>
+</ul>
+</li>
+</ul>
+<p>多态：</p>
+<ul>
+<li><p>理解：一个事务的多种形态</p>
+</li>
+<li><p>对象的多态性：父类引用指向子类对象（属性不可用）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//父类Person，子类Man、Woman</span></span><br><span class="line">Person p1 = <span class="keyword">new</span> Person();</span><br><span class="line">Man man = <span class="keyword">new</span> Man();</span><br><span class="line">Woman woman = <span class="keyword">new</span> Woman();</span><br><span class="line"></span><br><span class="line"><span class="comment">//对象的多态性</span></span><br><span class="line">Person p2 = <span class="keyword">new</span> Man();</span><br><span class="line">Person p3 = <span class="keyword">new</span> Woman();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>多态的使用：虚拟方法调用。意思是有了对象的多态性以后，在编译器，只能调用父类中声明的方法，但在运行期，实际执行的是子类重写父类的方法（编译看左边，运行看右边）</p>
+</li>
+<li><p>多态的使用前提</p>
+<ul>
+<li>类的继承关系</li>
+<li>方法的重写</li>
+</ul>
+</li>
+<li><p>为什么要使用多态？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AnimalTest</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    AnimalTest test = <span class="keyword">new</span> AnimalTest();</span><br><span class="line">    test.function(<span class="keyword">new</span> Dog());</span><br><span class="line">    test.function(<span class="keyword">new</span> Cat());</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//多态性写法：有了多态性以后，不用专门去写很多重载的方法来针对不同的子类</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">(Animal animal)</span> </span>&#123;</span><br><span class="line">    animal.eat();</span><br><span class="line">    animal.shout();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//没有多态性写法</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">(Dog dog)</span> </span>&#123;</span><br><span class="line">    dog.eat();</span><br><span class="line">    dog.shout();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">function</span><span class="params">(Cat cat)</span> </span>&#123;</span><br><span class="line">    cat.eat();</span><br><span class="line">    cat.shout();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"动物：进食"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"动物：叫"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Dog</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"狗吃骨头"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"汪汪汪"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Cat</span> <span class="keyword">extends</span> <span class="title">Animal</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">eat</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"猫吃鱼"</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">shout</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"喵喵喵"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>向下转型</p>
+<ul>
+<li>使用：使用强制类型转换符，可以调用子类特有的属性和方法</li>
+<li>注意事项：使用强转时，可能出现ClassCastException的异常，从而转换失败。为了防止转换失败，引入了instanceof关键字</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p>this</p>
+<ul>
+<li>理解：当前对象或当前正在创建的对象</li>
+<li>使用<ul>
+<li>可以用来调用：属性、方法、构造器</li>
+<li>在类的构造器中，可以显式的使用“this(形参列表)”的方式，调用本类中指定的其他构造器</li>
+</ul>
+</li>
+<li>说明<ul>
+<li>在类的方法或构造器中，我们可以使用“this.属性”或“this.方法”的方式，调用当前对象的属性或方法。但是，通常情况下，我们都省略不写。若方法或构造器的形参和类的属性同名时，我们必须显式的使用该方法来调用，以此表明变量是属性，而非形参</li>
+<li>构造器中不能通过“this(形参列表)”的方式调用自己</li>
+<li>“this(形参列表)”必须声明在当前构造器的首行，且只能声明一个</li>
+</ul>
+</li>
+</ul>
+<p>super</p>
+<ul>
+<li>理解：父类的</li>
+<li>使用：可以用来调用属性、方法、构造器</li>
+<li>说明<ul>
+<li>可以在子类的方法或构造器中，通过“super.属性”或“super.方法”的方式，显式的调用父类中声明的属性或方法。但是，通常情况下，我们省略不写。若要在子类中调用父类中声明的属性，则必须显式的使用该方法来调用，以此表明调用的是父类中声明的属性</li>
+<li>可以在子类的构造器中显式的使用“super(形参列表)”的方式，调用父类中声明的指定的构造器</li>
+<li>“super(形参列表)”必须声明在子类构造器的首行</li>
+<li>在类的构造器中，“this(形参列表)”和“super(形参列表)”只能使用一个</li>
+<li>在构造器的首行，没有显示的声明“this(形参列表)”和“super(形参列表)”，则默认调用父类中空参的构造器super()</li>
+</ul>
+</li>
+</ul>
+<p>package</p>
+<ul>
+<li>使用package声明类或接口所属的包，声明在源文件的首行</li>
+<li>同一个包下，不能命名同名的接口或类</li>
+</ul>
+<p>import</p>
+<ul>
+<li>作用：在源文件中显式的使用import结构导入指定包下的类或接口</li>
+<li>可以使用”xxx.*”的方式，表示导入xxx包下的所有结构</li>
+<li>如使用的是java.lang或本包下定义的，则可以省略import</li>
+</ul>
+<p>instanceof</p>
+<ul>
+<li>格式：a instanceof A，判断对象a是否是类A的实例，若是，返回true；不是，返回false</li>
+<li>使用：为防止出现ClassCastException的异常，在向下转型之前，先使用instanceof判断</li>
+<li>注：要求a所属的类与类A必须是子类和父类的关系，否则编译错误</li>
+</ul>
+<p>static</p>
+<ul>
+<li>引入：当我们编写一个类时，其实就是在描述其对象的属性和行为，而并没有产生实质上的对象，只有通过new关键字才会产生出对象，这时系统才会分配内存空间给对象，其方法才可以供外部调用。为了在无论是否产生对象和产生多少对象的情况下，某些特定的数据在内存空间里只有一份，因此引入static关键字</li>
+<li>理解：静态的</li>
+<li>使用：可以用来修饰属性、方法、代码块、内部类<ul>
+<li>修饰属性：静态变量<ul>
+<li>按是否使用static修饰，变量可分为静态变量（类变量）和非静态变量（实例变量）</li>
+<li>多个对象共享一个静态变量</li>
+<li>静态变量随着类的加载而加载，由于类只加载一次，因此静态变量在内存中只会存在一份，存在方法区的静态域中。静态变量要早于对象的创建</li>
+</ul>
+</li>
+<li>修饰方法：静态方法<ul>
+<li>随着类的加载而加载</li>
+<li>静态方法中，只能调用静态的方法和属性；而非静态方法中，即可以调用非静态的方法和属性，也可以调用静态的方法和属性</li>
+</ul>
+</li>
+<li>注意事项<ul>
+<li>在静态的方法中，不能使用static、super关键字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如何确定属性或方法是否要声明为static？<ul>
+<li>属性：属性可以被多个对象所共享，不会随着对象的不同而不同</li>
+<li>方法<ul>
+<li>操作静态属性的方法，通常声明为static</li>
+<li>工具类中的方法，通常声明为static</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>final</p>
+<ul>
+<li>理解：最终的</li>
+<li>使用：可以用来修饰类、方法、变量<ul>
+<li>修饰类：此类不能被其他类所继承。如String、System、StringBuffer类</li>
+<li>修饰方法：此方法不可被重写</li>
+<li>修饰变量：此变量就称为常量，不可被改变<ul>
+<li>修饰属性：可以赋值的方式：显式初始化、代码块中初始化、构造器中初始化</li>
+<li>修饰局部变量：当final修饰形参时，表明此形参是个常量，因此只能在方法内使用，而不能重新赋值</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>abstract</p>
+<ul>
+<li>理解：抽象的</li>
+<li>使用：可以用来修饰类、方法<ul>
+<li>修饰类：抽象类<ul>
+<li>此类不可被实例化</li>
+<li>抽象类中一定有构造器，便于子类对象实例化时调用</li>
+<li>开发中，都会提供抽象类的子类，让子类对象实例化，完成相关操作</li>
+</ul>
+</li>
+<li>修饰方法：抽象方法<ul>
+<li>只有方法的声明，没有方法体</li>
+<li>包含抽象方法的类，一定是一个抽象类；反之，抽象类中不一定有抽象方法</li>
+<li>子类必须重写父类中所有的抽象方法，子类才可以实例化；否则，子类也要声明为抽象类</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意事项：<ul>
+<li>abstract不能用来修饰私有方法、静态方法、final的方法、final的类</li>
+</ul>
+</li>
+</ul>
+<p>interface</p>
+<ul>
+<li>使用<ul>
+<li>JDK 7及以前<ul>
+<li>全局常量：public static final，可以省略</li>
+<li>抽象方法：public abstract，可以省略</li>
+</ul>
+</li>
+<li>JDK 8，除了定义全局常量和抽象方法外，还可以定义静态方法、默认方法<ul>
+<li>静态方法：接口中定义的静态方法，只能通过接口来调用</li>
+<li>默认方法：通过实现类的对象，可以调用接口中的默认方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注意事项：<ul>
+<li>接口中不可定义构造器，意味着接口不可以实例化</li>
+<li>在Java中，接口和类是并列的两个结构</li>
+<li>Java开发中，接口通过让类去实现（implements）的方式来使用</li>
+<li>实现类必须重写接口中所有的抽象方法，才可以实例化；否则，此实现类还是一个抽象类</li>
+<li>Java类可以实现多个接口，弥补了Java单继承的局限性</li>
+<li>接口与接口之间为继承关系，且是多继承</li>
+<li>继承是一个“是不是”的关系，而接口实现则是“能不能”的关系</li>
+<li>如果子类（或实现类）继承的父类和实现的接口中声明了同名同参数的方法，那么子类在没有重写此方法的情况下，默认调用的是父类中的同名同参数方法。即类优先原则</li>
+<li>如果实现类实现了多个接口，而这些接口中定义了同名同参数的默认方法，那么在实现类没有重写此方法的情况下，会报错。即接口冲突</li>
+</ul>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+        <div class="declare">
+          <ul class="post-copyright">
+            <li>
+              <i class="ri-copyright-line"></i>
+              <strong>Copyright： </strong>
+              Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source.
+            </li>
+          </ul>
+        </div>
+        
+    <footer class="article-footer">
+      
+          
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/13/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day4/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+  
+  <nav class="article-nav">
+    
+      <a href="/2020/05/15/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day5/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Java基础——Day5
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/05/12/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day3/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Java基础——Day3</div>
+      </a>
+    
+  </nav>
+
+
+  
+
+  
+  
+  
+
+  
+  
+  
+
+</article>
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul class="list-inline">
+      <li>
+        &copy;
+        2019-2020
+        鱼丸子
+      </li>
+      <li>
+        
+        Powered by
+        
+        
+        <a href="https://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul class="list-inline">
+      <li>
+        
+        
+        <span>
+  <i>PV:<span id="busuanzi_value_page_pv"></span></i>
+  <i>UV:<span id="busuanzi_value_site_uv"></span></i>
+</span>
+        
+      </li>
+      
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="鱼丸子"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/null">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+
+<script>
+  try {
+    var typed = new Typed("#subtitle", {
+      strings: ['努力、感謝、笑顔，うちらは乃木坂、上り坂！４６！', '', ''],
+      startDelay: 0,
+      typeSpeed: 200,
+      loop: true,
+      backSpeed: 100,
+      showCursor: true
+    });
+  } catch (err) {
+  }
+
+</script>
+
+
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  // Tocbot_v4.7.0  http://tscanlin.github.io/tocbot/
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+
+
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+
+<script type="text/javascript" src="https://js.users.51.la/20544303.js"></script>
+
+
+    
+  </div>
+</body>
+
+</html>
