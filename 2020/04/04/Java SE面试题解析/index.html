@@ -104,7 +104,9 @@
       
       <h2 id="变量自增"><a href="#变量自增" class="headerlink" title="变量自增"></a>变量自增</h2><p><strong>Q:</strong><br>如下代码的运行结果?</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">    i = i++;</span><br><span class="line">    <span class="keyword">int</span> j = i++;</span><br><span class="line">    <span class="keyword">int</span> k = i + ++i * i++;</span><br><span class="line"></span><br><span class="line">    System.out.println(<span class="string">"i="</span> + i);</span><br><span class="line">    System.out.println(<span class="string">"j="</span> + j);</span><br><span class="line">    System.out.println(<span class="string">"k="</span> + k);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <p><strong>A：</strong><br>i=4<br>j=1<br>k=11</p>
 <p><strong>知识点:</strong></p>
 <ol>
