@@ -70,6 +70,775 @@
     
     
     
+    <article id="post-SpringBoot——Day4" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/22/SpringBoot%E2%80%94%E2%80%94Day4/"
+    >SpringBoot——Day4</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/22/SpringBoot%E2%80%94%E2%80%94Day4/" class="article-date">
+  <time datetime="2020-06-22T05:16:07.000Z" itemprop="datePublished">2020-06-22</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="SpringBoot与Web开发"><a href="#SpringBoot与Web开发" class="headerlink" title="SpringBoot与Web开发"></a>SpringBoot与Web开发</h2><h3 id="SpringBoot对静态资源的映射原则"><a href="#SpringBoot对静态资源的映射原则" class="headerlink" title="SpringBoot对静态资源的映射原则"></a>SpringBoot对静态资源的映射原则</h3><ul>
+<li>规则一：<ul>
+<li>所有/webjars/**，都去<code>classpath:/META-INF/resources/webjars/</code>找资源<ul>
+<li>webjars：即以jar包的方式引入静态资源</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>规则二：<ul>
+<li>/** 访问当前项目的任何资源</li>
+<li>会在以下文件夹中查找（静态资源的文件夹）：<ul>
+<li>classpath:/META-INF/resources/</li>
+<li>classpath:/resources/</li>
+<li>classpath:/static/</li>
+<li>classpath:/public/</li>
+<li>/：当前项目的更路径</li>
+</ul>
+</li>
+<li>规则三：<ul>
+<li>首页（欢迎页），静态资源文件夹下的所有index.html页面；被/** 映射</li>
+</ul>
+</li>
+<li>规则四：<ul>
+<li>所有的**/favicon.ico，都是在静态资源文件下找</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h3><p><strong>图示如下：</strong></p>
+<p><img src="/assets/SpringBoot%E2%80%94%E2%80%94Day4_1.png" alt=" "></p>
+<p><strong>概述：</strong></p>
+<p>SpringBoot推荐Thymeleaf模板引擎，因为其语法简单，功能强大</p>
+<p><strong>引入thymeleaf：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Thymeleaf使用&amp;语法：</strong></p>
+<ol>
+<li><p>导入thymeleaf的名称空间</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用thymeleaf语法</p>
+<ul>
+<li><p>th标签<br><img src="assets/SpringBoot%E2%80%94%E2%80%94Day4_2.png" alt=" "></p>
+</li>
+<li><p>表达式</p>
+  <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Simple</span> <span class="string">expressions（表达式）:</span></span><br><span class="line">    <span class="attr">Variable</span> <span class="string">Expressions: $&#123;...&#125;：获取变量值；OGNL</span></span><br><span class="line">        <span class="attr">1）获取对象的属性、调用方法</span></span><br><span class="line">        <span class="attr">2）使用内置的基本对象</span></span><br><span class="line">        <span class="attr">3）内置的一些工具对象</span></span><br><span class="line">    <span class="attr">Selection</span> <span class="string">Variable Expressions: *&#123;...&#125;：选择表达式，和$&#123;...&#125;在功能上一样</span></span><br><span class="line">        <span class="meta">补充：配合th</span>:<span class="string">object="$..."使用</span></span><br><span class="line">    <span class="attr">Message</span> <span class="string">Expressions: #&#123;...&#125;：获取国际化内容</span></span><br><span class="line">    <span class="attr">Link</span> <span class="string">URL Expressions: @&#123;...&#125;：定义URL</span></span><br><span class="line">    <span class="attr">Fragment</span> <span class="string">Expressions: ~&#123;...&#125;：片段引用表达式</span></span><br><span class="line"><span class="attr">Literals（字面量）：</span></span><br><span class="line">    <span class="attr">Text</span> <span class="string">literals: 'one text', 'Another one!',…</span></span><br><span class="line">    <span class="attr">Number</span> <span class="string">literals: 0, 34, 3.0, 12.3,…</span></span><br><span class="line">    <span class="attr">Boolean</span> <span class="string">literals: true, false</span></span><br><span class="line">    <span class="attr">Null</span> <span class="string">literal: null</span></span><br><span class="line">    <span class="attr">Literal</span> <span class="string">tokens: one, sometext, main,…</span></span><br><span class="line"><span class="attr">Text</span> <span class="string">operations（文本操作）:</span></span><br><span class="line">    <span class="attr">String</span> <span class="string">concatenation: +</span></span><br><span class="line">    <span class="attr">Literal</span> <span class="string">substitutions: |The name is $&#123;name&#125;|</span></span><br><span class="line"><span class="attr">Arithmetic</span> <span class="string">operations（数学运算）:</span></span><br><span class="line">    <span class="attr">Binary</span> <span class="string">operators: +, -, *, /, %</span></span><br><span class="line">    <span class="attr">Minus</span> <span class="string">sign (unary operator): -</span></span><br><span class="line"><span class="attr">Boolean</span> <span class="string">operations（boolean运算）:</span></span><br><span class="line">    <span class="attr">Binary</span> <span class="string">operators: and, or</span></span><br><span class="line">    <span class="attr">Boolean</span> <span class="string">negation (unary operator): !, not</span></span><br><span class="line"><span class="attr">Comparisons</span> <span class="string">and equality（比较运算）:</span></span><br><span class="line">    <span class="attr">Comparators</span>: <span class="string">&gt;, &lt;, &gt;=, &lt;= (gt, lt, ge, le)</span></span><br><span class="line">    <span class="attr">Equality</span> <span class="string">operators: ==, != (eq, ne)</span></span><br><span class="line"><span class="attr">Conditional</span> <span class="string">operators（条件运算）:</span></span><br><span class="line">    <span class="meta">If-then</span>: <span class="string">(if) ? (then)</span></span><br><span class="line">    <span class="meta">If-then-else</span>: <span class="string">(if) ? (then) : (else)</span></span><br><span class="line">    <span class="attr">Default</span>: <span class="string">(value) ?: (defaultvalue)</span></span><br><span class="line"><span class="attr">Special</span> <span class="string">tokens（无操作）:</span></span><br><span class="line">    <span class="meta">No-Operation</span>: <span class="string">_</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ol>
+<p>注：<br>只要我们把HTML页面放在classpath:/templates/，thymeleaf就能自动渲染</p>
+<hr>
+<h3 id="SpringMVC自动配置"><a href="#SpringMVC自动配置" class="headerlink" title="SpringMVC自动配置"></a>SpringMVC自动配置</h3><p>SpringBoot自动配置好了SpringMVC。默认配置如下：</p>
+<ul>
+<li>自动配置了ViewResolver（视图解析器：根据方法的返回值得到视图对象），视图对象决定如何渲染（转发？重定向？）</li>
+<li>我们可以自己给容器中添加一个视图解析器，自动的将其组合进来</li>
+<li>静态资源文件夹路径、webjars</li>
+<li>静态首页访问</li>
+<li>favicon.ico</li>
+<li>自动注册了Converter（用于类型转换的转换器）、Formatter（格式化器）<ul>
+<li>自己添加格式化器、转换器，只需要将其放在容器中即可</li>
+</ul>
+</li>
+<li>HttpMessageConverter：SpringMVC用来转换Http请求和响应的</li>
+<li>MessageCodesResolver：定义错误代码生成规则</li>
+<li>ConfigurableWebBindingInitializer：初始化WebDataBindfer</li>
+</ul>
+<hr>
+<h3 id="修改SpringBoot的默认配置"><a href="#修改SpringBoot的默认配置" class="headerlink" title="修改SpringBoot的默认配置"></a>修改SpringBoot的默认配置</h3>
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-SpringBoot——Day3" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/19/SpringBoot%E2%80%94%E2%80%94Day3/"
+    >SpringBoot——Day3</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/19/SpringBoot%E2%80%94%E2%80%94Day3/" class="article-date">
+  <time datetime="2020-06-19T07:42:29.000Z" itemprop="datePublished">2020-06-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="SpringBoot与日志"><a href="#SpringBoot与日志" class="headerlink" title="SpringBoot与日志"></a>SpringBoot与日志</h2><h3 id="日志框架"><a href="#日志框架" class="headerlink" title="日志框架"></a>日志框架</h3><table>
+<thead>
+<tr>
+<th>日志门面（日志抽象层）</th>
+<th>日志实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>JCL、<strong>SLF4j</strong>、jboss-logging</td>
+<td>Log4j、JUL、Log4j2、<strong>Logback</strong></td>
+</tr>
+</tbody></table>
+<p>SpringBoot底层是SPring，而Spring框架默认用JCL；<br>SpringBoot选用SLF4j和logback</p>
+<p>注：左边选一个抽象层，右边选一个实现来使用</p>
+<hr>
+<h3 id="SLF4j使用"><a href="#SLF4j使用" class="headerlink" title="SLF4j使用"></a>SLF4j使用</h3><p><strong>使用：</strong></p>
+<p>给系统里面导入slf4j的jar和logback的实现jar：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.slf4j.Logger;</span><br><span class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(HelloWorld<span class="class">.<span class="keyword">class</span>)</span>;</span><br><span class="line">    logger.info(<span class="string">"Hello World"</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如下图:<br><img src="/assets/SpringBoot%E2%80%94%E2%80%94Day3_1.png" alt=" "></p>
+<p><strong>统一日志到slf4j：</strong></p>
+<ol>
+<li>将系统中其他日志框架先排除出去</li>
+<li>用中间包来替换原有的日志框架</li>
+<li>导入slf4j其他的实现</li>
+</ol>
+<p>如下图：<br><img src="assets/SpringBoot%E2%80%94%E2%80%94Day3_2.png" alt=" "></p>
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>以后开发的时候，日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法</li>
+<li>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，配置文件还是做成日志实现框架自己本身的配置文件</li>
+</ul>
+<hr>
+<h3 id="SpringBoot日志关系"><a href="#SpringBoot日志关系" class="headerlink" title="SpringBoot日志关系"></a>SpringBoot日志关系</h3><p>底层依赖关系如图：<br><img src="assets/SpringBoot%E2%80%94%E2%80%94Day3_3.png" alt=" "></p>
+<ul>
+<li>SpringBoot底层使用slf4j+logback的方式进行日志记录</li>
+<li>SpringBoot可以将其他的日志都替换成slf4j</li>
+<li>如果我们要引入其他框架，一定要把这个框架的默认日志依赖移除掉</li>
+</ul>
+<p><strong>总结：</strong></p>
+<p>SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可</p>
+<hr>
+<h3 id="日志使用"><a href="#日志使用" class="headerlink" title="日志使用"></a>日志使用</h3><p><strong>使用：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//记录器</span></span><br><span class="line">    Logger logger = LoggerFactory.getLogger(getClass());</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">contextLoads</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//日志的级别由低到高：trace &lt; debug &lt; info &lt; warn &lt; error</span></span><br><span class="line">        <span class="comment">//可以调整输出的日志级别，这样日志就只会在这个级别及以后的高级级别生效</span></span><br><span class="line">        logger.trace(<span class="string">"这是trace日志……"</span>);</span><br><span class="line">        logger.debug(<span class="string">"这是debug日志……"</span>);</span><br><span class="line">        <span class="comment">//SpringBoot默认使用info级别及以后，即root级别</span></span><br><span class="line">        logger.info(<span class="string">"这是info日志……"</span>);</span><br><span class="line">        logger.warn(<span class="string">"这是warn日志……"</span>);</span><br><span class="line">        logger.error(<span class="string">"这是error日志……"</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>日志输出格式：</strong></p>
+<p>可在主配置文件中设置日志输出的格式、日志输出路径、日志级别等：</p>
+<ul>
+<li>logging.level.xxx.xxx=trace：日志级别</li>
+<li>logging.pattern.console=：在控制台输出的日志格式</li>
+<li>logging.pattern.file=：在文件输出的日志格式</li>
+</ul>
+<p>输入格式：</p>
+<ul>
+<li>%d：表示日期时间</li>
+<li>%thread：表示线程名</li>
+<li>%-5level：级别从左显示5个字符宽度</li>
+<li>%logger{50}：表示logger名字最长50个字符，否则按照句点分割</li>
+<li>%msg：日志消息</li>
+<li>%n：换行符</li>
+</ul>
+<p>如：%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</p>
+<p><strong>指定配置：</strong></p>
+<p>给类路径下放上每个日志框架自己的配置文件即可，这时SpringBoot就不会使用默认配置的。配置文件命名规则如下：</p>
+<ul>
+<li><p>Logback：logback-spring.xml/groovy、logback.xml/groovy</p>
+<ul>
+<li><p>logback.xml：直接就被日志框架识别了</p>
+</li>
+<li><p>logback-spring.xml：日志框架不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot的高级profile功能</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">springProfile</span> <span class="attr">name</span>=<span class="string">"适用环境名（如dev、test等）"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">pattern</span>&gt;</span> 指定输出格式 <span class="tag">&lt;/<span class="name">pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">springProfile</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Log4j2：log4j2-spring.xml、log4j2.xml</p>
+</li>
+<li><p>JUL：logging.properties</p>
+</li>
+</ul>
+
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E5%BF%97/" rel="tag">日志</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-SpringBoot——Day2" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/18/SpringBoot%E2%80%94%E2%80%94Day2/"
+    >SpringBoot——Day2</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/18/SpringBoot%E2%80%94%E2%80%94Day2/" class="article-date">
+  <time datetime="2020-06-18T09:41:36.000Z" itemprop="datePublished">2020-06-18</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="SpringBoot配置"><a href="#SpringBoot配置" class="headerlink" title="SpringBoot配置"></a>SpringBoot配置</h2><h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><p><strong>类型：</strong></p>
+<p>SpringBoot是使用一个全局的配置文件，且文件名是固定的：</p>
+<ul>
+<li>application.properties</li>
+<li>application.yml<ul>
+<li>yml是YAML（YAML Ain`t Markup Language）语言的文件，以数据为中心，比json、xml等更适合做配置文件</li>
+</ul>
+</li>
+</ul>
+<p><strong>作用：</strong></p>
+<p>修改SpringBoot自动配置的默认值</p>
+      
+      <a class="article-more-link" href="/2020/06/18/SpringBoot%E2%80%94%E2%80%94Day2/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/YAML%E8%AF%AD%E6%B3%95/" rel="tag">YAML语法</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE%E5%8E%9F%E7%90%86/" rel="tag">自动配置原理</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E9%A1%BA%E5%BA%8F/" rel="tag">配置加载顺序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6/" rel="tag">配置文件</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-SpringBoot——Day1" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/17/SpringBoot%E2%80%94%E2%80%94Day1/"
+    >SpringBoot——Day1</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/17/SpringBoot%E2%80%94%E2%80%94Day1/" class="article-date">
+  <time datetime="2020-06-17T00:48:42.000Z" itemprop="datePublished">2020-06-17</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="SpringBoot入门"><a href="#SpringBoot入门" class="headerlink" title="SpringBoot入门"></a>SpringBoot入门</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>简化Spring应用开发的一个框架；整个Spring技术栈的一个大整合；J2EE开发的一站式解决方案。优点如下：</p>
+<ul>
+<li>快速创建独立运行的Spring项目以及主流框架集成</li>
+<li>使用嵌入式的Servlet容器，应用无需打成WAR包</li>
+<li>starters（启动器）自动依赖与版本控制</li>
+<li>大量的自动配置，简化开发，也可修改默认值</li>
+<li>无需配置XML，无代码生成，开箱即用</li>
+<li>准生产环境的运行时应用监控</li>
+<li>与云计算的天然集成</li>
+</ul>
+      
+      <a class="article-more-link" href="/2020/06/17/SpringBoot%E2%80%94%E2%80%94Day1/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE/" rel="tag">SpringBoot创建项目</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Java高级——Day11" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/14/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day11/"
+    >Java高级——Day11</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/14/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day11/" class="article-date">
+  <time datetime="2020-06-14T04:38:05.000Z" itemprop="datePublished">2020-06-14</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>使用数组(Array)存储对象具有一些弊端：</p>
+<ul>
+<li>一旦初始化后，长度是确定的，无法修改</li>
+<li>数组一旦定义好，其元素的类型是确定的。因此只能操作指定类型的数据</li>
+<li>数组中提供的方法有限，对于添加、删除、插入数据等操作，非常不方便，且效率不高</li>
+<li>获取数组中实际元素的个数的需求，数组没有现成的属性或方法可用</li>
+<li>数组存储数据的特点是有序、可重复的</li>
+</ul>
+      
+      <a class="article-more-link" href="/2020/06/14/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day11/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E9%AB%98%E7%BA%A7/" rel="tag">Java高级</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Java高级——Day10" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/06/03/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day10/"
+    >Java高级——Day10</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/06/03/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day10/" class="article-date">
+  <time datetime="2020-06-03T02:54:04.000Z" itemprop="datePublished">2020-06-03</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="枚举类"><a href="#枚举类" class="headerlink" title="枚举类"></a>枚举类</h2><p><strong>理解：</strong></p>
+<ul>
+<li>类的对象只有有限个，确定的，称此类为枚举类</li>
+<li>当需要定义一组常量时，建议使用枚举类</li>
+<li>若枚举类中只有一个对象，则可作为单例模式的实现方式</li>
+</ul>
+<p><strong>定义：</strong></p>
+<p>方式一：jdk 5.0之前，自定义枚举类</p>
+      
+      <a class="article-more-link" href="/2020/06/03/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day10/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E9%AB%98%E7%BA%A7/" rel="tag">Java高级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%9A%E4%B8%BE%E7%B1%BB/" rel="tag">枚举类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B3%A8%E8%A7%A3/" rel="tag">注解</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Java高级——Day9" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/20/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day9/"
+    >Java高级——Day9</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/20/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day9/" class="article-date">
+  <time datetime="2020-05-20T13:42:43.000Z" itemprop="datePublished">2020-05-20</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="Java常用类"><a href="#Java常用类" class="headerlink" title="Java常用类"></a>Java常用类</h2><h3 id="String相关的类"><a href="#String相关的类" class="headerlink" title="String相关的类"></a>String相关的类</h3><p><strong>概述：</strong></p>
+<ul>
+<li>String是一个final类，不可被继承，代表不可变的字符序列（不可变性）</li>
+<li>字符串是常量，它们的值在创建之后不能更改</li>
+<li>String对象的字符内容是存储在一个字符数组value[ ]中的</li>
+<li>String实现了Serializable接口：表示字符串是支持序列化的</li>
+<li>String实现了Comparable接口：表示String可以比较大小</li>
+<li>通过字面量的方式（区别于new）给一个字符串赋值，此时的字符串值声明在字符串常量池中。字符串常量池中是不会存储相同内容的字符串的</li>
+</ul>
+      
+      <a class="article-more-link" href="/2020/05/20/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day9/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BigDecimal%E7%B1%BB/" rel="tag">BigDecimal类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BigInteger%E7%B1%BB/" rel="tag">BigInteger类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E9%AB%98%E7%BA%A7/" rel="tag">Java高级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Math%E7%B1%BB/" rel="tag">Math类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/String%E7%B1%BB/" rel="tag">String类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/System%E7%B1%BB/" rel="tag">System类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B8%B8%E7%94%A8%E7%B1%BB/" rel="tag">常用类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%A5%E6%9C%9F%E6%97%B6%E9%97%B4/" rel="tag">日期时间</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%AF%94%E8%BE%83%E5%99%A8/" rel="tag">比较器</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
+    <article id="post-Java高级——Day8" class="article article-type-post" itemscope
+  itemprop="blogPost" data-scroll-reveal>
+
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/05/19/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day8/"
+    >Java高级——Day8</a> 
+</h2>
+ 
+
+    </header>
+    
+
+    
+    <div class="article-meta">
+      <a href="/2020/05/19/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day8/" class="article-date">
+  <time datetime="2020-05-19T12:25:41.000Z" itemprop="datePublished">2020-05-19</time>
+</a>
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Java/">Java</a>
+  </div>
+
+      
+      
+      
+    </div>
+    
+
+    
+
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+      
+
+      
+      <h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>程序：为完成特定任务、用某种语言编写的一组指令的集合，即指一段静态的代码，静态对象<br>进程：是程序的一次执行过程，或是正在运行的一个程序</p>
+<ul>
+<li>进程作为资源分配的单位，系统在运行时会为进程分配不同的内存区域（方法区和堆空间）</li>
+</ul>
+<p>线程：是一个程序内部的一条执行路径</p>
+<ul>
+<li>若一个进程同一时间并行执行多个线程，就是支持多线程的</li>
+<li>线程作为调度和执行的单位，每个线程拥有独立的运行栈和程序计数器</li>
+</ul>
+      
+      <a class="article-more-link" href="/2020/05/19/Java%E9%AB%98%E7%BA%A7%E2%80%94%E2%80%94Day8/">阅读更多...</a>
+      
+      
+      <!-- reward -->
+      
+    </div>
+    
+    
+      <!-- copyright -->
+      
+    <footer class="article-footer">
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E9%AB%98%E7%BA%A7/" rel="tag">Java高级</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/" rel="tag">多线程</a></li></ul>
+
+
+    </footer>
+
+  </div>
+
+  
+
+  
+  
+  
+
+  
+
+</article>
+    
     <article id="post-Java基础——Day7" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
@@ -236,729 +1005,6 @@
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">单例设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法设计模式</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java基础——Day5" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/15/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day5/"
-    >Java基础——Day5</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/15/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day5/" class="article-date">
-  <time datetime="2020-05-15T02:15:17.000Z" itemprop="datePublished">2020-05-15</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="重写"><a href="#重写" class="headerlink" title="重写"></a>重写</h2><p>定义：在子类中根据需要对从父类中继承来的方法进行改造，也称为方法的重置、覆盖<br>应用：重写以后，在执行程序时，子类的方法将覆盖父类的方法<br>重写的规定：</p>
-<ul>
-<li>子类重写的方法的方法名和形参列表与父类被重写的方法的方法名和形参列表相同</li>
-<li>子类重写的方法的权限修饰符不小于父类被重写的方法的权限修饰符</li>
-<li>子类不能重写父类声明为private权限的方法</li>
-<li>父类被重写的方法的返回值类型是void，则子类重写的方法的返回值类型只能是void</li>
-<li>父类被重写的方法的返回值类型是A类型，则子类重写的方法的返回值类型可以是A类或A的子类</li>
-<li>父类被重写的方法的返回值类型是基本数据类型，则子类重写的方法的返回值类型必须相同</li>
-<li>子类重写的方法抛出的异常类型不大于父类被重写的方法抛出的异常类型</li>
-<li>子类和父类中的同名同参数的方法要么都声明为非static（考虑重写），要么都static（不是重写）</li>
-</ul>
-      
-      <a class="article-more-link" href="/2020/05/15/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day5/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaBean/" rel="tag">JavaBean</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Object%E7%B1%BB/" rel="tag">Object类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%85%E8%A3%85%E7%B1%BB/" rel="tag">包装类</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%87%8D%E5%86%99/" rel="tag">重写</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java基础——Day4" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/13/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day4/"
-    >Java基础——Day4</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/13/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day4/" class="article-date">
-  <time datetime="2020-05-13T06:18:45.000Z" itemprop="datePublished">2020-05-13</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="面向对象编程"><a href="#面向对象编程" class="headerlink" title="面向对象编程"></a>面向对象编程</h2><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向过程（POP）：强调的是功能行为，以函数为最小单位，考虑怎么做<br>面向对象（OOP）：将功能封装进对象，强调具备了功能的对象，以类/对象为最小单位，考虑谁来做<br>面向对象的三大特征：</p>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><p>定义：</p>
-      
-      <a class="article-more-link" href="/2020/05/13/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day4/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java基础——Day3" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/12/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day3/"
-    >Java基础——Day3</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/12/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day3/" class="article-date">
-  <time datetime="2020-05-12T01:54:16.000Z" itemprop="datePublished">2020-05-12</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>定义：是多个相同类型数据按一定顺序排列的集合，并使用一个名字命名，并通过编号的方式对这些数据进行统一管理<br>特点：</p>
-<ul>
-<li>数组是有序排列的</li>
-<li>数组本身是引用数据类型，而数组中的元素可以是任何数据类型</li>
-<li>创建数组对象会在内存中开辟一整块连续的空间，而数组名中引用的是这块连续空间的首地址</li>
-<li>数组的长度一旦确定，就不能修改</li>
-</ul>
-<p>使用：</p>
-      
-      <a class="article-more-link" href="/2020/05/12/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day3/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E7%BB%84/" rel="tag">数组</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java基础——Day2" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day2/"
-    >Java基础——Day2</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day2/" class="article-date">
-  <time datetime="2020-05-09T08:36:54.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
-<li>自增（++）或自减（–）不会改变变量本身的数据类型</li>
-<li>赋值运算符（+=、-=、%=、/=、%=）不会改变变量本身的数据类型</li>
-<li>当逻辑运算符的符号左边为false时，&amp;继续执行右边的运算，而&amp;&amp;不再继续执行</li>
-<li>当逻辑运算符的符号左边为true时，|继续执行右边的运算，而||不再继续执行</li>
-<li>当三位运算符和if-else语句都可以使用时，优先选择三位运算符</li>
-<li>三位运算符要求左右两边属于同一类</li>
-</ul>
-<hr>
-<h2 id="流程控制"><a href="#流程控制" class="headerlink" title="流程控制"></a>流程控制</h2>
-      
-      <a class="article-more-link" href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day2/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6/" rel="tag">流程控制</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-Java基础——Day1" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day1/"
-    >Java基础——Day1</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day1/" class="article-date">
-  <time datetime="2020-05-09T02:40:02.000Z" itemprop="datePublished">2020-05-09</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="关键字和保留字"><a href="#关键字和保留字" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h2><h3 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h3><p>定义：被Java语言赋予了特殊含义，用作专门用途的字符串<br>特点：关键字中所有字母都为小写</p>
-<table>
-<thead>
-<tr>
-<th>用于定义数据类型的关键字</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>class</td>
-<td>interface</td>
-<td>enum</td>
-<td>byte</td>
-<td>short</td>
-</tr>
-<tr>
-<td>int</td>
-<td>long</td>
-<td>float</td>
-<td>double</td>
-<td>char</td>
-</tr>
-<tr>
-<td>boolean</td>
-<td>void</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>用于定义流程控制的关键字</th>
-<th></th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>if</td>
-<td>else</td>
-<td>switch</td>
-<td>case</td>
-<td>default</td>
-</tr>
-<tr>
-<td>while</td>
-<td>do</td>
-<td>for</td>
-<td>break</td>
-<td>continue</td>
-</tr>
-<tr>
-<td>return</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>用于定义访问权限的关键字</th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>private</td>
-<td>protected</td>
-<td>public</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>用于定义类、函数、变量修饰符的关键字</th>
-<th></th>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>abstract</td>
-<td>final</td>
-<td>static</td>
-<td>synchronized</td>
-</tr>
-</tbody></table>
-      
-      <a class="article-more-link" href="/2020/05/09/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day1/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BF%9D%E7%95%99%E5%AD%97/" rel="tag">保留字</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%85%B3%E9%94%AE%E5%AD%97/" rel="tag">关键字</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%98%E9%87%8F/" rel="tag">变量</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A0%87%E8%AF%86%E7%AC%A6/" rel="tag">标识符</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-常用的DOS命令" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/05/08/%E5%B8%B8%E7%94%A8%E7%9A%84DOS%E5%91%BD%E4%BB%A4/"
-    >常用的DOS命令</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/05/08/%E5%B8%B8%E7%94%A8%E7%9A%84DOS%E5%91%BD%E4%BB%A4/" class="article-date">
-  <time datetime="2020-05-08T06:58:44.000Z" itemprop="datePublished">2020-05-08</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/DOS/">DOS</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <ul>
-<li>dir：列出当前目录下的文件夹及文件</li>
-<li>md：创建目录</li>
-<li>rd；删除目录</li>
-<li>cd：进入指定目录</li>
-<li>cd..：退回到上一级目录</li>
-<li>cd\：退回到根目录</li>
-<li>del：删除文件</li>
-<li>exit：退出DOS命令行</li>
-</ul>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/DOS%E5%91%BD%E4%BB%A4/" rel="tag">DOS命令</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-JVM——助记符" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/04/17/JVM%E2%80%94%E2%80%94%E5%8A%A9%E8%AE%B0%E7%AC%A6/"
-    >JVM——助记符</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/04/17/JVM%E2%80%94%E2%80%94%E5%8A%A9%E8%AE%B0%E7%AC%A6/" class="article-date">
-  <time datetime="2020-04-17T08:52:24.000Z" itemprop="datePublished">2020-04-17</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <p>getstatic：访问某个类或接口的静态变量</p>
-<p>putstatic：对静态变量赋值</p>
-<p>invokestatic：调用类的静态方法</p>
-<p>ldc：表示将int、float或String类型的常量值从常量池中推送至栈顶</p>
-<p>bipush：表示将单字节的常量值（-128 ~ 127）推送至栈顶</p>
-<p>sipush：表示将一个短整型常量值（-32768 ~ 32767）推送至栈顶</p>
-<p>iconst_1：表示将int类型1推送至栈顶（仅iconst_m1~iconst_5适用）</p>
-<p>anewarray：表示创建一个引用类型的（如类、数组、接口）数组，并将其引用值压入栈顶</p>
-<p>newarray：表示创建一个指定的原始类型（如int、float、char等）的数组，并将其引用值压入栈顶</p>
-
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8A%A9%E8%AE%B0%E7%AC%A6/" rel="tag">助记符</a></li></ul>
-
-
-    </footer>
-
-  </div>
-
-  
-
-  
-  
-  
-
-  
-
-</article>
-    
-    <article id="post-JVM——类加载器深入解析与阶段分解" class="article article-type-post" itemscope
-  itemprop="blogPost" data-scroll-reveal>
-
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2020/04/14/JVM%E2%80%94%E2%80%94%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%98%B6%E6%AE%B5%E5%88%86%E8%A7%A3/"
-    >JVM——类加载器深入解析与阶段分解</a> 
-</h2>
- 
-
-    </header>
-    
-
-    
-    <div class="article-meta">
-      <a href="/2020/04/14/JVM%E2%80%94%E2%80%94%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%98%B6%E6%AE%B5%E5%88%86%E8%A7%A3/" class="article-date">
-  <time datetime="2020-04-14T03:15:34.000Z" itemprop="datePublished">2020-04-14</time>
-</a>
-      
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JVM/">JVM</a>
-  </div>
-
-      
-      
-      
-    </div>
-    
-
-    
-
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-      
-
-      
-      <h2 id="类的加载"><a href="#类的加载" class="headerlink" title="类的加载"></a>类的加载</h2><p>类的加载指的是将类的.class文件中的二进制数据读入到内存中，将其放在运行时数据区的方法区内，然后在内存中创建一个java.lang.Class对象，用来封装类在方法区内的数据结构</p>
-<h2 id="类加载方式"><a href="#类加载方式" class="headerlink" title="类加载方式"></a>类加载方式</h2><p>加载.class文件的方式：</p>
-<ul>
-<li>从本地系统中直接加载</li>
-<li>通过网络下载.class文件</li>
-<li>从zip，jar等归档文件中加载.class文件</li>
-<li>从专有数据库中提取.class文件</li>
-<li><strong>将Java源文件动态编译为.class文件</strong></li>
-</ul>
-      
-      <a class="article-more-link" href="/2020/04/14/JVM%E2%80%94%E2%80%94%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%E6%B7%B1%E5%85%A5%E8%A7%A3%E6%9E%90%E4%B8%8E%E9%98%B6%E6%AE%B5%E5%88%86%E8%A7%A3/">阅读更多...</a>
-      
-      
-      <!-- reward -->
-      
-    </div>
-    
-    
-      <!-- copyright -->
-      
-    <footer class="article-footer">
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8/" rel="tag">类加载器</a></li></ul>
 
 
     </footer>

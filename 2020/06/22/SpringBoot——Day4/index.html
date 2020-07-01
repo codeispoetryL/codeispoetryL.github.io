@@ -9,7 +9,7 @@
     
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Java基础——Day6 |  鱼丸子
+    SpringBoot——Day4 |  鱼丸子
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -36,7 +36,7 @@
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-Java基础——Day6" class="article article-type-post" itemscope
+  <article id="post-SpringBoot——Day4" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -44,7 +44,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Java基础——Day6
+  SpringBoot——Day4
 </h1>
  
 
@@ -53,12 +53,12 @@
 
     
     <div class="article-meta">
-      <a href="/2020/05/16/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day6/" class="article-date">
-  <time datetime="2020-05-16T11:25:39.000Z" itemprop="datePublished">2020-05-16</time>
+      <a href="/2020/06/22/SpringBoot%E2%80%94%E2%80%94Day4/" class="article-date">
+  <time datetime="2020-06-22T05:16:07.000Z" itemprop="datePublished">2020-06-22</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Java/">Java</a>
+    <a class="article-category-link" href="/categories/SpringBoot/">SpringBoot</a>
   </div>
 
       
@@ -68,7 +68,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">507</span>
+            <span class="post-count">657</span>
         </span>
     </span>
 
@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">1 min</span>
+            <span class="post-count">2 min</span>
         </span>
     </span>
 </div>
@@ -102,56 +102,78 @@
       
 
       
-      <h2 id="单例设计模式"><a href="#单例设计模式" class="headerlink" title="单例设计模式"></a>单例设计模式</h2><p>定义：采取一定的方法保证在整个的软件系统中，对某个类只能存在一个对象实例，并且该类只提供一个取得对象实例的方法<br>实现：</p>
-<ul>
-<li><p>饿汉式</p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bank</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1. 私有化类的构造器</span></span><br><span class="line">    <span class="comment">//为了避免在其他类直接创建该类对象</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Bank</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. 内部创建类的对象。要求此对象必须声明为静态的</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Bank instance = <span class="keyword">new</span> Bank();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3. 提供公共的静态方法，返回类的对象</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Bank <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<a id="more"></a>
-
-<ul>
-<li><p>懒汉式</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Order</span> </span>&#123;</span><br><span class="line">    <span class="comment">//1. 私有化类的构造器</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Order</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. 声明当前类对象，没有初始化。要求此对象必须声明为静态的</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Order instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3. 声明public static的返回当前类对象的方法</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Order <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(instance == <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">          <span class="keyword">synchronized</span>(Order<span class="class">.<span class="keyword">class</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(instance == <span class="keyword">null</span>) &#123;</span><br><span class="line">              instance = <span class="keyword">new</span> Order();</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>区别：</p>
-<ul>
-<li>饿汉式<ul>
-<li>好处：是线程安全的</li>
-<li>坏处：对象加载时间过长</li>
-</ul>
-</li>
-<li>懒汉式<ul>
-<li>好处：延迟对象的创建</li>
+      <h2 id="SpringBoot与Web开发"><a href="#SpringBoot与Web开发" class="headerlink" title="SpringBoot与Web开发"></a>SpringBoot与Web开发</h2><h3 id="SpringBoot对静态资源的映射原则"><a href="#SpringBoot对静态资源的映射原则" class="headerlink" title="SpringBoot对静态资源的映射原则"></a>SpringBoot对静态资源的映射原则</h3><ul>
+<li>规则一：<ul>
+<li>所有/webjars/**，都去<code>classpath:/META-INF/resources/webjars/</code>找资源<ul>
+<li>webjars：即以jar包的方式引入静态资源</li>
 </ul>
 </li>
 </ul>
-<p>优点：由于单例模式只生成一个实例，减少了系统性能开销<br>应用场景：</p>
-<ul>
-<li>网站的计数器</li>
-<li>应用程序的日志应用</li>
-<li>数据库连接池</li>
-<li>读取配置文件的类</li>
-<li>Windows的Task Manager（任务管理器）</li>
-<li>Winodws的Recycle Bin（回收站）</li>
+</li>
+<li>规则二：<ul>
+<li>/** 访问当前项目的任何资源</li>
+<li>会在以下文件夹中查找（静态资源的文件夹）：<ul>
+<li>classpath:/META-INF/resources/</li>
+<li>classpath:/resources/</li>
+<li>classpath:/static/</li>
+<li>classpath:/public/</li>
+<li>/：当前项目的更路径</li>
+</ul>
+</li>
+<li>规则三：<ul>
+<li>首页（欢迎页），静态资源文件夹下的所有index.html页面；被/** 映射</li>
+</ul>
+</li>
+<li>规则四：<ul>
+<li>所有的**/favicon.ico，都是在静态资源文件下找</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <hr>
-<h2 id="模板方法设计模式"><a href="#模板方法设计模式" class="headerlink" title="模板方法设计模式"></a>模板方法设计模式</h2><p>解决的问题：</p>
+<h3 id="模板引擎"><a href="#模板引擎" class="headerlink" title="模板引擎"></a>模板引擎</h3><p><strong>图示如下：</strong></p>
+<p><img src="/assets/SpringBoot%E2%80%94%E2%80%94Day4_1.png" alt=" "></p>
+<p><strong>概述：</strong></p>
+<p>SpringBoot推荐Thymeleaf模板引擎，因为其语法简单，功能强大</p>
+<p><strong>引入thymeleaf：</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Thymeleaf使用&amp;语法：</strong></p>
+<ol>
+<li><p>导入thymeleaf的名称空间</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用thymeleaf语法</p>
 <ul>
-<li>当功能内部一部分实现是确定的，一部分实现是不确定的。这时可以把不确定的部分暴漏出去，让子类去实现</li>
-<li>换句话说，在软件开发中实现一个算法时，整体步骤很固定、通用，这些步骤已经在父类中写好了。但是某些部分易变，易变部分可以抽象出来，供不同子类实现。这就是一种模板模式</li>
-<li>应用场景<ul>
-<li>Junit单元测试</li>
-<li>JavaWeb的servlet中关于doGet / doPost方法调用</li>
-<li>Hibernate中模板程序</li>
-<li>Spring中JDBCTemplate、HibernateTemplate等</li>
-</ul>
+<li><p>th标签<br><img src="assets/SpringBoot%E2%80%94%E2%80%94Day4_2.png" alt=" "></p>
+</li>
+<li><p>表达式</p>
+  <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Simple</span> <span class="string">expressions（表达式）:</span></span><br><span class="line">    <span class="attr">Variable</span> <span class="string">Expressions: $&#123;...&#125;：获取变量值；OGNL</span></span><br><span class="line">        <span class="attr">1）获取对象的属性、调用方法</span></span><br><span class="line">        <span class="attr">2）使用内置的基本对象</span></span><br><span class="line">        <span class="attr">3）内置的一些工具对象</span></span><br><span class="line">    <span class="attr">Selection</span> <span class="string">Variable Expressions: *&#123;...&#125;：选择表达式，和$&#123;...&#125;在功能上一样</span></span><br><span class="line">        <span class="meta">补充：配合th</span>:<span class="string">object="$..."使用</span></span><br><span class="line">    <span class="attr">Message</span> <span class="string">Expressions: #&#123;...&#125;：获取国际化内容</span></span><br><span class="line">    <span class="attr">Link</span> <span class="string">URL Expressions: @&#123;...&#125;：定义URL</span></span><br><span class="line">    <span class="attr">Fragment</span> <span class="string">Expressions: ~&#123;...&#125;：片段引用表达式</span></span><br><span class="line"><span class="attr">Literals（字面量）：</span></span><br><span class="line">    <span class="attr">Text</span> <span class="string">literals: 'one text', 'Another one!',…</span></span><br><span class="line">    <span class="attr">Number</span> <span class="string">literals: 0, 34, 3.0, 12.3,…</span></span><br><span class="line">    <span class="attr">Boolean</span> <span class="string">literals: true, false</span></span><br><span class="line">    <span class="attr">Null</span> <span class="string">literal: null</span></span><br><span class="line">    <span class="attr">Literal</span> <span class="string">tokens: one, sometext, main,…</span></span><br><span class="line"><span class="attr">Text</span> <span class="string">operations（文本操作）:</span></span><br><span class="line">    <span class="attr">String</span> <span class="string">concatenation: +</span></span><br><span class="line">    <span class="attr">Literal</span> <span class="string">substitutions: |The name is $&#123;name&#125;|</span></span><br><span class="line"><span class="attr">Arithmetic</span> <span class="string">operations（数学运算）:</span></span><br><span class="line">    <span class="attr">Binary</span> <span class="string">operators: +, -, *, /, %</span></span><br><span class="line">    <span class="attr">Minus</span> <span class="string">sign (unary operator): -</span></span><br><span class="line"><span class="attr">Boolean</span> <span class="string">operations（boolean运算）:</span></span><br><span class="line">    <span class="attr">Binary</span> <span class="string">operators: and, or</span></span><br><span class="line">    <span class="attr">Boolean</span> <span class="string">negation (unary operator): !, not</span></span><br><span class="line"><span class="attr">Comparisons</span> <span class="string">and equality（比较运算）:</span></span><br><span class="line">    <span class="attr">Comparators</span>: <span class="string">&gt;, &lt;, &gt;=, &lt;= (gt, lt, ge, le)</span></span><br><span class="line">    <span class="attr">Equality</span> <span class="string">operators: ==, != (eq, ne)</span></span><br><span class="line"><span class="attr">Conditional</span> <span class="string">operators（条件运算）:</span></span><br><span class="line">    <span class="meta">If-then</span>: <span class="string">(if) ? (then)</span></span><br><span class="line">    <span class="meta">If-then-else</span>: <span class="string">(if) ? (then) : (else)</span></span><br><span class="line">    <span class="attr">Default</span>: <span class="string">(value) ?: (defaultvalue)</span></span><br><span class="line"><span class="attr">Special</span> <span class="string">tokens（无操作）:</span></span><br><span class="line">    <span class="meta">No-Operation</span>: <span class="string">_</span></span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
-
+</li>
+</ol>
+<p>注：<br>只要我们把HTML页面放在classpath:/templates/，thymeleaf就能自动渲染</p>
+<hr>
+<h3 id="SpringMVC自动配置"><a href="#SpringMVC自动配置" class="headerlink" title="SpringMVC自动配置"></a>SpringMVC自动配置</h3><p>SpringBoot自动配置好了SpringMVC。默认配置如下：</p>
+<ul>
+<li>自动配置了ViewResolver（视图解析器：根据方法的返回值得到视图对象），视图对象决定如何渲染（转发？重定向？）</li>
+<li>我们可以自己给容器中添加一个视图解析器，自动的将其组合进来</li>
+<li>静态资源文件夹路径、webjars</li>
+<li>静态首页访问</li>
+<li>favicon.ico</li>
+<li>自动注册了Converter（用于类型转换的转换器）、Formatter（格式化器）<ul>
+<li>自己添加格式化器、转换器，只需要将其放在容器中即可</li>
+</ul>
+</li>
+<li>HttpMessageConverter：SpringMVC用来转换Http请求和响应的</li>
+<li>MessageCodesResolver：定义错误代码生成规则</li>
+<li>ConfigurableWebBindingInitializer：初始化WebDataBindfer</li>
+</ul>
+<hr>
+<h3 id="修改SpringBoot的默认配置"><a href="#修改SpringBoot的默认配置" class="headerlink" title="修改SpringBoot的默认配置"></a>修改SpringBoot的默认配置</h3>
       
       <!-- reward -->
       
@@ -215,14 +237,14 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/05/16/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day6/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/06/22/SpringBoot%E2%80%94%E2%80%94Day4/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java%E5%9F%BA%E7%A1%80/" rel="tag">Java基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E4%BE%8B%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">单例设计模式</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">模板方法设计模式</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li></ul>
 
 
     </footer>
@@ -233,19 +255,10 @@
   
   <nav class="article-nav">
     
-      <a href="/2020/05/18/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day7/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Java基础——Day7
-          
-        </div>
-      </a>
     
-    
-      <a href="/2020/05/15/Java%E5%9F%BA%E7%A1%80%E2%80%94%E2%80%94Day5/" class="article-nav-link">
+      <a href="/2020/06/19/SpringBoot%E2%80%94%E2%80%94Day3/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">Java基础——Day5</div>
+        <div class="article-nav-title">SpringBoot——Day3</div>
       </a>
     
   </nav>
